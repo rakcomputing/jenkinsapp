@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/rakcomputing/jenkinsapp.git'
+                  git branch: 'main', url: 'https://github.com/rakcomputing/jenkinsapp.git'
             }
         }
         stage('Install') {
