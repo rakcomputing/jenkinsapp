@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         NODE_ENV = 'production'
-        PATH = "/usr/local/bin:$PATH"  // ប្រសិនបើ node/npm ត្រូវបានដំឡើងនៅទីនេះ
+        PATH = "/usr/bin:/usr/local/bin:$PATH"  // include node/npm location
     }
 
     stages {
@@ -15,6 +15,8 @@ pipeline {
 
         stage('Install dependencies') {
             steps {
+                sh 'which node'
+                sh 'which npm'
                 sh 'node -v'
                 sh 'npm -v'
                 sh 'npm install'
