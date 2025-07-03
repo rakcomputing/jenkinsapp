@@ -3,11 +3,7 @@ pipeline {
 
     environment {
         NODE_ENV = 'production'
-        PATH = "/usr/local/bin:$PATH"  // បើ run npm/node ដោយ path
-    }
-
-    tools {
-        nodejs 'Node20' // ឬ Node18 ប្រសិនបើអ្នកបាន setup ជា tool
+        PATH = "/usr/local/bin:$PATH"  // ប្រសិនបើ node/npm ត្រូវបានដំឡើងនៅទីនេះ
     }
 
     stages {
@@ -31,18 +27,11 @@ pipeline {
             }
         }
 
-        stage('Lint (Optional)') {
-            steps {
-                sh 'npm run lint || true'
-            }
-        }
-
         stage('Start (Optional)') {
             when {
                 branch 'main'
             }
             steps {
-                echo 'Starting app (for testing)...'
                 sh 'npm run start & sleep 5'
             }
         }
