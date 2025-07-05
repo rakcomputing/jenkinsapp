@@ -38,41 +38,42 @@ pipeline {
                 '''
             }
         }
-         stage("Add Domain Name") {
-            steps {
-                sh '''
-                    echo "🔧 Creating NGINX config for domain ${domain_name}.rakdev.online..."
+        stage("Add Domain Name") {
+    steps {
+        sh '''
+            echo "🔧 Creating NGINX config for domain ${domain_name}.rakdev.online..."
 
-                    CONFIG_PATH="/etc/nginx/conf.d/${domain_name}.conf"
+            CONFIG_PATH="/etc/nginx/conf.d/${domain_name}.conf"
 
-                    if [ -f "$CONFIG_PATH" ]; then
-                        echo "🗑️ Removing existing config: $CONFIG_PATH"
-                        sudo rm -f "$CONFIG_PATH"
-                    fi
+            if [ -f "$CONFIG_PATH" ]; then
+                echo "🗑️ Removing existing config: $CONFIG_PATH"
+                sudo rm -f "$CONFIG_PATH"
+            fi
 
-                    sudo tee "$CONFIG_PATH" > /dev/null <<EOF
-                    # NGINX configuration for ${domain_name}.rakdev.online
-                    server {
-                        listen 80;
-                        listen [::]:80;
-                        server_name ${domain_name}.rakdev.online;
+            sudo tee "$CONFIG_PATH" > /dev/null <<EOF
+# NGINX configuration for ${domain_name}.rakdev.online
+server {
+    listen 80;
+    listen [::]:80;
+    server_name ${domain_name}.rakdev.online;
 
-                        location / {
-                            proxy_pass http://localhost:${service_port};
-                            proxy_http_version 1.1;
-                            proxy_set_header Upgrade \$http_upgrade;
-                            proxy_set_header Connection 'upgrade';
-                            proxy_set_header Host \$host;
-                            proxy_cache_bypass \$http_upgrade;
-                        }
-                    }
-                    EOF
+    location / {
+        proxy_pass http://localhost:${service_port};
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host \$host;
+        proxy_cache_bypass \$http_upgrade;
+    }
+}
+EOF
 
-                    echo "✅ NGINX config created."
-                    echo "🔁 Reloading NGINX..."
-                    sudo nginx -t && sudo systemctl reload nginx && echo "✅ NGINX reloaded."
-                '''
-            }
-        }
+            echo "✅ NGINX config created."
+            echo "🔁 Reloading NGINX..."
+            sudo nginx -t && sudo systemctl reload nginx && echo "✅ NGINX reloaded."
+        '''
+    }
+}
+
     }
 }
