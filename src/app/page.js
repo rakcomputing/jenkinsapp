@@ -26,12 +26,12 @@ export default function Home() {
     <div className=" mt-50 grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <div className="w-full max-w-md">
         <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
-          Welcome to Jenkins App
+          Welcome to OS Jenkins App
         </h1>
 
         <form
           onSubmit={handleLogin}
-          className="bg-red-100 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 border border-gray-200"
+          className="bg-green-100 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 border border-gray-200"
         >
           <div className="mb-4">
             <label

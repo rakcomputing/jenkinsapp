@@ -73,6 +73,8 @@ EOF
                     echo "✅ NGINX config created."
                     echo "🔁 Reloading NGINX..."
                     sudo nginx -t && sudo systemctl reload nginx && echo "✅ NGINX reloaded."
+                    sudo certbot --nginx -d ${domain_name}.rakdev.online
+                    echo "✅ NGINX reloaded with new config for ${domain_name}.rakdev.online"
                 """
             }
         }
