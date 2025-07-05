@@ -69,9 +69,7 @@ server {
 }
 EOF
 
-                    echo "✅ NGINX config created."
-                    echo "🔁 Reloading NGINX..."
-                    sudo nginx -t && sudo systemctl reload nginx && echo "✅ NGINX reloaded."
+                    
                 """
             }
         }
