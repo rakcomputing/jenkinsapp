@@ -31,7 +31,7 @@ export default function Home() {
 
         <form
           onSubmit={handleLogin}
-          className="bg-green-50 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 border border-gray-200"
+          className="bg-red-100 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 border border-gray-200"
         >
           <div className="mb-4">
             <label
