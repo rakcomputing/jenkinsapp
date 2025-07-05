@@ -51,25 +51,35 @@ pipeline {
                         sudo rm -f "\$CONFIG_PATH"
                     fi
 
-                    sudo tee "\$CONFIG_PATH" > /dev/null <<EOF
-# NGINX configuration for ${domain_name}.rakdev.online
-server {
-    listen 80;
-    listen [::]:80;
-    server_name ${domain_name}.rakdev.online;
+                    sudo tee "\$CONFIG_PATH" > /dev/null <<'EOF'
+        # NGINX configuration for ${domain_name}.rakdev.online
+        server {
+            listen 80;
+            listen [::]:80;
+            server_name ${domain_name}.rakdev.online;
 
-    location / {
-        proxy_pass http://localhost:${service_port};
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-}
-EOF
+            location / {
+                proxy_pass http://localhost:${service_port};
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade \$http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host \$host;
+                proxy_cache_bypass \$http_upgrade;
+            }
+        }
+        EOF
 
-                    
+                    echo "✅ NGINX config created."
+                    echo "🔁 Reloading NGINX..."
+                    sudo nginx -t && sudo systemctl reload nginx && echo "✅ NGINX reloaded."
+                """
+            }
+        }
+        stage("Check domain") {
+            steps {
+                sh """
+                    echo "🌐 Checking domain ${domain_name}.rakdev.online..."
+                    curl -I http://${domain_name}.rakdev.online
                 """
             }
         }
