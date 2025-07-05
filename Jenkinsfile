@@ -52,7 +52,7 @@ pipeline {
                         sudo rm -f "\$CONFIG_PATH"
                     fi
 
-                    sudo tee "\$CONFIG_PATH" > /dev/null <<EOF
+                    sudo tee "\$CONFIG_PATH" > /dev/null <<'EOF'
 # NGINX configuration for ${domain_name}.rakdev.online
 server {
     listen 80;
@@ -62,10 +62,10 @@ server {
     location / {
         proxy_pass http://localhost:${service_port};
         proxy_http_version 1.1;
-        proxy_set_header Upgrade \\$http_upgrade;
+        proxy_set_header Upgrade \$http_upgrade;
         proxy_set_header Connection 'upgrade';
-        proxy_set_header Host \\$host;
-        proxy_cache_bypass \\$http_upgrade;
+        proxy_set_header Host \$host;
+        proxy_cache_bypass \$http_upgrade;
     }
 }
 EOF
