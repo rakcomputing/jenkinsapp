@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        domain_name = 'osjenkins'
+        domain_name = 'os-jenkins'
         container_name = 'os_jenkins-cont'
         service_port = '3001'
     }
