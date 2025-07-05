@@ -1,7 +1,9 @@
 pipeline {
     agent any
-
- 
+    environment {
+        domain_name = 'jenkinsadddata'
+        service_port = '3001'
+    }
 
     stages {
     
