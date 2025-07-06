@@ -96,7 +96,7 @@ export default function Home() {
                 <span className="text-white font-bold text-sm">J</span>
               </div>
               <h1 className="text-xl font-bold text-gray-800">
-                Newsfeed Songkran
+                Newsfeed Songkran Hello
               </h1>
             </div>
             <div className="flex items-center space-x-4">
