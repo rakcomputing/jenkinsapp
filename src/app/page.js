@@ -95,9 +95,7 @@ export default function Home() {
               <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">J</span>
               </div>
-              <h1 className="text-xl font-bold text-gray-800">
-                Newsfeed Songkran Hello
-              </h1>
+              <h1 className="text-xl font-bold text-gray-800">Jenkins</h1>
             </div>
             <div className="flex items-center space-x-4">
               <button className="p-2 hover:bg-gray-100 rounded-full">
